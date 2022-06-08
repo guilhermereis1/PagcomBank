@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<div class="card text-center">
+  <div class="card-header">
+    Saque Realizado
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Valor: <b><%= real(@withdraw.amount) %></b></h5>
+    <p class="card-text">De: <b><%= @withdraw.account.name %> - <%= @withdraw.account_id %></b></p>
+    <%= link_to 'Voltar', withdraws_path, class: 'btn btn-secondary' %>
+  </div>
+  <div class="card-footer text-muted">
+    Criado em: <%= @withdraw.created_at %>
+  </div>
+</div>
