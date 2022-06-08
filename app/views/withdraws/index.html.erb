@@ -7,6 +7,7 @@
     <tr>
       <th>Conta</th>
       <th>Valor</th>
+      <th>Data</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
       <tr>
         <td><%= withdraw.account.name %></td>
         <td><%= real(withdraw.amount) %></td>
+        <td><%= withdraw.created_at %></td>
         <td><%= link_to 'Show', withdraw, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>

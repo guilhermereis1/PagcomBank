@@ -6,7 +6,11 @@
   <thead>
     <tr>
       <th>Nome</th>
+      <th>Saldo</th>
       <th>Status</th>
+      <th>Depósitos</th>
+      <th>Saques</th>
+      <th>Transferências</th>
       <th>Criada em</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +20,11 @@
     <% @accounts.each do |account| %>
       <tr>
         <td><%= account.name %></td>
+        <td><%= real(account.balance.amount) %></td>
         <td><%= account.status ? "Ativa" : "Inativa" %></td>
+        <td><%= account.balance.deposit_references.count %></td>
+        <td><%= account.balance.withdraw_references.count %></td>
+        <td><%= account.balance.transfer_references.count %></td>
         <td><%= account.created_at %></td>
         <td><%= link_to 'Ver', account, class: 'btn btn-primary' %></td>
         <td><%= link_to 'Editar', edit_account_path(account), class: 'btn btn-warning' %></td>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Account:</strong>
+  <%= @balance.account_id %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @balance.amount %>
+</p>
+
+<p>
+  <strong>Deposit references:</strong>
+  <%= @balance.deposit_references %>
+</p>
+
+<p>
+  <strong>Withdraw references:</strong>
+  <%= @balance.withdraw_references %>
+</p>
+
+<p>
+  <strong>Transfer references:</strong>
+  <%= @balance.transfer_references %>
+</p>
+
+<%= link_to 'Edit', edit_balance_path(@balance) %> |
+<%= link_to 'Back', balances_path %>
