@@ -10,6 +10,7 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
+    puts "################ #{@account.deposits.inspect}"
   end
 
   # GET /accounts/new

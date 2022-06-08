@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Balances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Account</th>
+      <th>Amount</th>
+      <th>Deposit references</th>
+      <th>Withdraw references</th>
+      <th>Transfer references</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @balances.each do |balance| %>
+      <tr>
+        <td><%= balance.account_id %></td>
+        <td><%= balance.amount %></td>
+        <td><%= balance.deposit_references %></td>
+        <td><%= balance.withdraw_references %></td>
+        <td><%= balance.transfer_references %></td>
+        <td><%= link_to 'Show', balance %></td>
+        <td><%= link_to 'Edit', edit_balance_path(balance) %></td>
+        <td><%= link_to 'Destroy', balance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Balance', new_balance_path %>

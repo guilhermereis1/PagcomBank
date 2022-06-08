@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_030342) do
+ActiveRecord::Schema.define(version: 2022_06_08_032905) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -23,6 +23,17 @@ ActiveRecord::Schema.define(version: 2022_06_08_030342) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_accounts_on_user_id"
+  end
+
+  create_table "balances", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, default: "0.0", null: false
+    t.text "deposit_references"
+    t.text "withdraw_references"
+    t.text "transfer_references"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_balances_on_account_id"
   end
 
   create_table "deposits", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -64,6 +75,7 @@ ActiveRecord::Schema.define(version: 2022_06_08_030342) do
   end
 
   add_foreign_key "accounts", "users"
+  add_foreign_key "balances", "accounts"
   add_foreign_key "deposits", "accounts"
   add_foreign_key "transfers", "accounts"
   add_foreign_key "withdraws", "accounts"

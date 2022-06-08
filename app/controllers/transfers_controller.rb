@@ -7,6 +7,10 @@ class TransfersController < ApplicationController
   # GET /transfers or /transfers.json
   def index
     @transfers = Transfer.where(account_id: current_user.accounts.pluck(:id))
+    @received_transfers = Transfer.where(account_to: current_user.accounts.pluck(:id))
+
+    # Merge transfer with received_transfer
+    @transfers = @transfers + @received_transfers
   end
 
   # GET /transfers/1 or /transfers/1.json
