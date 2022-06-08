@@ -4,6 +4,7 @@ pt-BR:
       models: &models
         user: User
         account: Conta
+        deposit: Depósito
 
       attributes: &attributes
         <<: *models
@@ -23,3 +24,9 @@ pt-BR:
         <<: *attributes
         name: Descrição da Conta
         status: Status da Conta
+
+      deposit:
+        <<: *attributes
+        account_id: Conta Destino
+        account: Conta Destino
+        amount: Valor do Depósito
