@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Depósitos (<%= @deposits.count %>)</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Conta</th>
+      <th>Valor</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @deposits.each do |deposit| %>
+      <tr>
+        <td><%= deposit.account.name %></td>
+        <td><%= real(deposit.amount) %></td>
+        <td><%= link_to 'Ver', deposit, class: 'btn btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Depositar', new_deposit_path, class: 'btn btn-success' %>

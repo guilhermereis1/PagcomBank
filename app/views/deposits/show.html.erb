@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<div class="card text-center">
+  <div class="card-header">
+    Depósito Realizado
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Valor: <b><%= real(@deposit.amount) %></b></h5>
+    <p class="card-text">Para: <b><%= @deposit.account.name %> - <%= @deposit.account_id %></b></p>
+    <%= link_to 'Voltar', deposits_path, class: 'btn btn-secondary' %>
+  </div>
+  <div class="card-footer text-muted">
+    Criado em: <%= @deposit.created_at %>
+  </div>
+</div>
