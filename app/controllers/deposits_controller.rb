@@ -72,6 +72,6 @@ class DepositsController < ApplicationController
   end
 
   def set_options
-    @user_accounts = Account.where(user_id: current_user.id).pluck(:name, :id)
+    @user_accounts = Account.where(user_id: current_user.id, status: true).pluck(:name, :id)
   end
 end
