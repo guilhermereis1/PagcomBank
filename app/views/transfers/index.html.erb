@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transferência (<%= @transfers.count %>)</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>De</th>
+      <th>Valor</th>
+      <th>Para</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transfers.each do |transfer| %>
+      <tr>
+        <td><%= transfer.account_id %></td>
+        <td><%= real(transfer.amount) %></td>
+        <td><%= find_account(transfer.account_to).name %></td>
+        <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Transferir', new_transfer_path, class: 'btn btn-success' %>

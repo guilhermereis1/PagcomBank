@@ -6,6 +6,7 @@ pt-BR:
         account: Conta
         deposit: Depósito
         withdraw: Saque
+        transfer: Transferência
 
       attributes: &attributes
         <<: *models
@@ -37,3 +38,10 @@ pt-BR:
         account_id: Conta Destino
         account: Conta Destino
         amount: Valor do Saque
+
+      transfer:
+        <<: *attributes
+        account_id: De
+        account: De
+        account_to: Conta Destino
+        amount: Valor da Transferência
