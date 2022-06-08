@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_022710) do
+ActiveRecord::Schema.define(version: 2022_06_08_025101) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -46,6 +46,15 @@ ActiveRecord::Schema.define(version: 2022_06_08_022710) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "withdraws", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "account_id", null: false
+    t.decimal "amount", precision: 10, scale: 2, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_withdraws_on_account_id"
+  end
+
   add_foreign_key "accounts", "users"
   add_foreign_key "deposits", "accounts"
+  add_foreign_key "withdraws", "accounts"
 end
