@@ -1,0 +1,47 @@
+en:
+  views:
+    todo_list:
+      index:
+        title: "Todo List"
+        table:
+          head:
+            name: Title
+            tasks: Tasks
+        btns:
+          new: Create new Todo List
+          back: Back
+          view: View
+          edit: Edit
+          destroy: Destroy
+      show:
+        edit: Edit
+        back: Back
+        destroy: Destroy
+        create: Create Task
+        close_modal: Close
+        create_item: Create Item Task
+        statues:
+          done: Done
+          pending: Pending
+        notices:
+          created: Task created successfully
+          updated: Task updated successfully
+          destroyed: Task destroyed successfully
+          edited: Item Task edited successfully
+        status_task:
+          congrats: Congratulations! %{phrase}
+          shame: Shame! %{phrase}
+        modal:
+          title: Create Item Task
+          title_edit: Edit Item Task
+          input:
+            name:
+              placeholder: Enter the Task name...
+      edit:
+        title: "Edit Todo List"
+        btns:
+          edit: Update
+          back: Back
+      new:
+        errors:
+          title: "The title of the todo list is required"

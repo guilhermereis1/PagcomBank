@@ -1,0 +1,19 @@
+pt-BR:
+  activerecord:
+    common:
+      models: &models
+        user: User
+
+      attributes: &attributes
+        <<: *models
+        id: ID
+        created_at: Criado Em
+        updated_at: Atualizado Em
+
+    models:
+      <<: *models
+
+    attributes:
+      user:
+        <<: *attributes
+        name: Nome

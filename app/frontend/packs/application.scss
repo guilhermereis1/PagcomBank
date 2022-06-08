@@ -1,0 +1,25 @@
+// Import Bootstrap v5
+@import "~bootstrap/scss/bootstrap";
+
+.todo_itens {
+  margin-bottom: 20px;
+}
+
+.progress_bar {
+  margin-bottom: 20px;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.submitButton {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.alert_message {
+  margin-top: 20px;
+}
