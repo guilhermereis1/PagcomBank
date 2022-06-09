@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-  before_action :set_account, only: %i[ show edit update destroy ]
+  before_action :set_account, only: %i[ show edit update destroy transactions_per_date ]
   layout "user"
   before_action :authenticate_user!
 
@@ -10,11 +10,11 @@ class AccountsController < ApplicationController
 
   # GET /accounts/1 or /accounts/1.json
   def show
-    @account.deposits.inspect
-    @account.withdraws.inspect
-    @account.transfers.inspect
-
     @account_transactions = @account.deposits + @account.withdraws + @account.transfers
+
+    @organized_transactions = organized_transactions(@account_transactions)
+
+    transactions_per_date
   end
 
   # GET /accounts/new
@@ -61,6 +61,39 @@ class AccountsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to accounts_url, notice: "Conta encerrada com sucesso." }
       format.json { head :no_content }
+    end
+  end
+
+  def organized_transactions(transactions)
+    organized_transactions = []
+
+    transactions.each do |transaction|
+      trx = {}
+      trx[:id] = transaction.id
+      trx[:type] = transaction.class
+      trx[:amount] = transaction.amount
+      trx[:date] = transaction.created_at.strftime("%d/%m/%Y")
+      organized_transactions << trx
+    end
+
+    return organized_transactions
+  end
+
+  def transactions_per_date
+    @account_transactions = @account.deposits + @account.withdraws + @account.transfers
+
+    @organized_transactions = organized_transactions(@account_transactions)
+
+    params[:start_date] = params[:start_date].to_date.strftime("%d/%m/%Y") if params[:start_date] && params[:start_date] != ""
+    params[:end_date] = params[:end_date].to_date.strftime("%d/%m/%Y") if params[:end_date] && params[:end_date] != ""
+
+    if params[:start_date] && params[:end_date]
+      @organized_transactions = @organized_transactions.select do |trx|
+        trx[:date] >= params[:start_date] if params[:start_date]
+        trx[:date] <= params[:end_date] if params[:end_date]
+      end
+
+      @organized_transactions
     end
   end
 

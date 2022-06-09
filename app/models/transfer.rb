@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: transfers
+#
+#  id         :uuid             not null, primary key
+#  account_id :uuid             not null
+#  amount     :decimal(10, 2)   not null
+#  account_to :string           not null
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
 class Transfer < ApplicationRecord
   belongs_to :account
 
@@ -28,7 +39,7 @@ class Transfer < ApplicationRecord
     end
 
     if amount > 1000
-      account_balance = amount - 10
+      tax = 10
     end
 
     account.balance.update(amount: (account.balance.amount - tax) - amount)
@@ -36,6 +47,5 @@ class Transfer < ApplicationRecord
 
     to_account_to = Account.find(account_to)
     to_account_to.balance.update(amount: to_account_to.balance.amount + amount)
-    # to_account_to.balance.update(transfer_references: to_account_to.balance.transfer_references << id)
   end
 end

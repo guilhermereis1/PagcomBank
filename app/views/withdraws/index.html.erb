@@ -17,7 +17,7 @@
       <tr>
         <td><%= withdraw.account.name %></td>
         <td><%= real(withdraw.amount) %></td>
-        <td><%= withdraw.created_at %></td>
+        <td><%= br_date(withdraw.created_at) %></td>
         <td><%= link_to 'Show', withdraw, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>

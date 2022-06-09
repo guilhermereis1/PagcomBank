@@ -10,7 +10,29 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        ...
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Conta</th>
+              <th>Valor</th>
+              <th>Para</th>
+              <th>Data</th>
+              <th colspan="3"></th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @account.transfers.each do |transfer| %>
+              <tr>
+                <td><%= transfer.account.name %></td>
+                <td><%= real(transfer.amount) %></td>
+                <td><%= find_account(transfer.account_to).name %></td>
+                <td><%= br_date(transfer.created_at) %></td>
+                <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>

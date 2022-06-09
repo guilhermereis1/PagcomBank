@@ -17,7 +17,7 @@
       <tr>
         <td><%= deposit.account.name %></td>
         <td><%= real(deposit.amount) %></td>
-        <td><%= deposit.created_at %></td>
+        <td><%= br_date(deposit.created_at) %></td>
         <td><%= link_to 'Ver', deposit, class: 'btn btn-primary' %></td>
       </tr>
     <% end %>

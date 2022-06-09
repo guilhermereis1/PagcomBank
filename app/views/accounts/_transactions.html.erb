@@ -1,17 +1,38 @@
+<%= form_tag account_path(@account.id), :method => "get" do %>
+  <div class="row">
+    <div class="col-md-6">
+      <label for="">De</label>
+      <%= date_field_tag :start_date, {}, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-6">
+      <label for="">Até</label>
+      <%= date_field_tag :end_date, {}, class: 'form-control' %>
+    </div>
+
+    <div class="col-md-12 text-center">
+      <br>
+      <%= submit_tag "Filtrar", class: 'btn btn-success' %> | <%= link_to "Limpar", account_path(@account.id), class: 'btn btn-secondary' %>
+    </div>
+  </div>
+<% end %>
+
 <table class="table">
   <thead>
     <tr>
+      <th scope="col">ID</th>
       <th scope="col">Tipo</th>
       <th scope="col">Valor</th>
       <th scope="col">Data</th>
     </tr>
   </thead>
   <tbody>
-    <% @account_transactions.each do |transaction| %>
+    <% @organized_transactions.each do |transaction| %>
       <tr>
-        <td><%= kind_account(transaction.class) %></td>
-        <td><%= real(transaction.amount) %></td>
-        <td><%= transaction.created_at %></td>
+        <td><%= transaction[:id] %></td>
+        <td><%= kind_account(transaction[:type]) %></td>
+        <td><%= real(transaction[:amount]) %></td>
+        <td><%= transaction[:date] %></td>
       </tr>
     <% end %>
   </tbody>
