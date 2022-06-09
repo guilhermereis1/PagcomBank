@@ -27,7 +27,7 @@
                 <td><%= transfer.account.name %></td>
                 <td><%= real(transfer.amount) %></td>
                 <td><%= find_account(transfer.account_to).name %></td>
-                <td><%= transfer.created_at %></td>
+                <td><%= br_date(transfer.created_at) %></td>
                 <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
               </tr>
             <% end %>

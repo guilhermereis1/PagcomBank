@@ -25,7 +25,7 @@
         <td><%= account.balance.deposit_references.count %></td>
         <td><%= account.balance.withdraw_references.count %></td>
         <td><%= account.balance.transfer_references.count %></td>
-        <td><%= account.created_at %></td>
+        <td><%= br_date(account.created_at) %></td>
         <td><%= link_to 'Ver', account, class: 'btn btn-primary' %></td>
         <td><%= link_to 'Editar', edit_account_path(account), class: 'btn btn-warning' %></td>
         <td><%= link_to 'Encerrar', account, method: :delete, data: { confirm: 'Tem certeza disso?' }, class: 'btn btn-danger' %></td>

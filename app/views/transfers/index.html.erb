@@ -5,21 +5,33 @@
 <table class="table">
   <thead>
     <tr>
-      <th>De</th>
+      <th>Titularidade</th>
       <th>Valor</th>
-      <th>Para</th>
+      <th>Conta</th>
+      <td>Data</td>
       <th colspan="3"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @transfers.each do |transfer| %>
-      <tr>
-        <td><%= transfer.account_id %></td>
-        <td><%= real(transfer.amount) %></td>
-        <td><%= find_account(transfer.account_to).name %></td>
-        <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
-      </tr>
+      <% if is_from(transfer) %>
+        <tr class="table-secondary">
+          <td>Você transferiu</td>
+          <td><%= real(transfer.amount) %></td>
+          <td>DE: <b><%= transfer.account.name %></b> PARA: <b><%= find_account(transfer.account_to).name %></b></td>
+          <td><%= br_date(transfer.created_at) %></td>
+          <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
+        </tr>
+      <% else %>
+        <tr class="table-success">
+          <td>Você recebeu</td>
+          <td><%= real(transfer.amount) %></td>
+          <td><%= transfer.account.name %></td>
+          <td><%= br_date(transfer.created_at) %></td>
+          <td><%= link_to 'Ver', transfer, class: 'btn btn-primary' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
