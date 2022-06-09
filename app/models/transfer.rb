@@ -28,7 +28,7 @@ class Transfer < ApplicationRecord
     end
 
     if amount > 1000
-      account_balance = amount - 10
+      tax = 10
     end
 
     account.balance.update(amount: (account.balance.amount - tax) - amount)
@@ -36,6 +36,5 @@ class Transfer < ApplicationRecord
 
     to_account_to = Account.find(account_to)
     to_account_to.balance.update(amount: to_account_to.balance.amount + amount)
-    # to_account_to.balance.update(transfer_references: to_account_to.balance.transfer_references << id)
   end
 end
