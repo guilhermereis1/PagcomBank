@@ -13,10 +13,10 @@
 #
 FactoryBot.define do
   factory :balance do
-    account { nil }
-    amount { "9.99" }
-    deposit_references { "MyText" }
-    withdraw_references { "MyText" }
-    transfer_references { "MyText" }
+    account { create(:account) }
+    amount { 0.0 }
+    deposit_references { [] }
+    withdraw_references { [] }
+    transfer_references { [] }
   end
 end

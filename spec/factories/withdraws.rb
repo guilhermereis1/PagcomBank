@@ -10,7 +10,7 @@
 #
 FactoryBot.define do
   factory :withdraw do
-    account { nil }
-    amount { "9.99" }
+    account { create(:account) }
+    amount { 15 }
   end
 end
