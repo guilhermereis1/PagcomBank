@@ -17,4 +17,6 @@ class Balance < ApplicationRecord
   serialize :deposit_references, Array
   serialize :withdraw_references, Array
   serialize :transfer_references, Array
+
+  validates :amount, numericality: { greater_than_or_equal_to: 0 }
 end

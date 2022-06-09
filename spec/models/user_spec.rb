@@ -12,18 +12,21 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe User, type: :model do
   let(:user) { create(:user) }
+  let(:accounts) { create(:account, user: user) }
 
-  context 'Associations' do
-    it 'Should have many todo_list_items' do
-      expect(user).to respond_to(:todo_lists)
+  context "Associations" do
+    it "Should have many accounts" do
+      expect(user).to respond_to(:accounts)
     end
+  end
 
-    it 'Should have many todo_list_items' do
-      expect(user).to respond_to(:events)
+  context "Validations" do
+    it "Should have a name presence true" do
+      expect(user).to validate_presence_of(:name)
     end
   end
 end

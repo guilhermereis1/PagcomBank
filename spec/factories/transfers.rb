@@ -11,8 +11,8 @@
 #
 FactoryBot.define do
   factory :transfer do
-    account { nil }
-    amount { "9.99" }
-    account_to { "MyString" }
+    account_id { create(:account).id }
+    amount { 0.0 }
+    account_to { create(:account).id }
   end
 end

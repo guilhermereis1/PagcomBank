@@ -19,7 +19,7 @@ class Transfer < ApplicationRecord
 
   validate :account_should_be_different_from_account_to
 
-  after_create :update_account_balance
+  before_create :update_account_balance
 
   def account_should_be_different_from_account_to
     if account_id == account_to
@@ -27,25 +27,39 @@ class Transfer < ApplicationRecord
     end
   end
 
+  validates :amount, numericality: { less_than_or_equal_to: ->(transfer) { transfer.account.balance.amount } }
+
+  validate :tax_values
+
+  def tax_values
+    if (amount + (day_tax + amount_tax(amount))) > account.balance.amount
+      errors.add(:amount, "Não é possível transferir R$#{amount} pois o saldo é R$#{account.balance.amount} e tem uma taxa de R$#{day_tax + amount_tax(amount)}, seu limite é de: #{account.balance.amount - day_tax - amount_tax(amount)}")
+    end
+  end
+
   private
 
   def update_account_balance
-    tax = 0.0
-
-    if Date.today.wday.between?(1, 5) && Time.now.hour.between?(9, 18)
-      tax = 5
-    else
-      tax = 7
-    end
-
-    if amount > 1000
-      tax = 10
-    end
-
-    account.balance.update(amount: (account.balance.amount - tax) - amount)
+    account.balance.update(amount: (account.balance.amount - (day_tax + amount_tax(amount))) - amount)
     account.balance.update(transfer_references: account.balance.transfer_references << id)
 
     to_account_to = Account.find(account_to)
     to_account_to.balance.update(amount: to_account_to.balance.amount + amount)
+  end
+
+  def day_tax
+    if Date.today.wday.between?(1, 5) && Time.now.hour.between?(9, 18)
+      return 5
+    else
+      return 7
+    end
+  end
+
+  def amount_tax(amount)
+    if amount > 1000
+      return 10
+    else
+      return 0
+    end
   end
 end

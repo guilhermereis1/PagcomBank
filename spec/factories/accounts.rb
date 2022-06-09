@@ -11,6 +11,8 @@
 #
 FactoryBot.define do
   factory :account do
-    user { nil }
+    name { Faker::Name.name }
+    status { true }
+    user { create(:user) }
   end
 end
